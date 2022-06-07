@@ -1,3 +1,19 @@
+# Dev Instructions
+
+Installation:
+
+`sudo apt install npm`
+
+`sudo npm install`
+
+Running server:
+
+`npm start`
+
+Then go to http://localhost:5000/
+
+# About
+
 Probabilistic languages are useful tools to simplify code and reduce code size for complex statistical models, but from a practical perspective, they are not as accessible to target users as would be desired. Many ideal users do not come from a coding background, and many who do come from a background that does not include probabilistic features in their programming experience. We introduce SCRIBBLE, an intuitive visual GUI tool for probabilistic programming. SCRIBBLE is inspired by Scratch \citet{resnick2009scratch}, which provides an interface to an object-oriented programming language for beginners to drag and drop code blocks. We aim for SCRIBBLE to give a simple interface for building a probabilistic program and a simple representation for the output of the probabilistic program. Our group consists of members with the application development experience necessary to create this tool and we aim to match our skills to the needed development background of the project. In order to keep track of our project, we aim to first create our user interface and support minimal probabilistic features as a bare minimum (flip in Dice for example). From here, we can build up further features, including control flow, a wider variety of types, and more.
 
 Our motivation behind this project is to provide a tool to introduce beginners to probabilistic languages and help beginners debug through visualizations of the output. We noticed that a majority of probabilistic languages are written as a functional language, which is much less intuitive for most people compared to imperative languages. In addition, avid users of probabilistic programming languages are typically in the natural and social science who wish for an easy interface to describe their statistical models and run inference on them. Since there are several probabilistic programming languages to choose from and adopt, it can become cumbersome for non-engineers to technically evaluate which programming language will work for their use-case and then learn the syntax for that language. Thus by providing a tool that visualizes the construction of the program and the output, it can help beginners learn how to use the probabilistic programming language and become more comfortable with functional languages. It will help reduce barrier to entry to probabilistic programming. Additionally, the visualization of the output could also be beneficial for advanced users of probabilistic programming languages to debug their programs. By the nature of the probabilistic languages, it is difficult to debug since there is no particular correct answer or any correct outcome. By providing a visual representation of the output, we hope that it can help programmers debug their programs more easily. 

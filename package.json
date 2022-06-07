@@ -1,0 +1,27 @@
+{
+  "name": "scribble",
+  "version": "1.0.0",
+  "description": "SCRIBBLE (Super Cool Really Important Beautiful Bodacious Language Envisage) An intuitive visual GUI tool for probabilistic programming.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonpanelli/scribble.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonpanelli/scribble/issues"
+  },
+  "homepage": "https://github.com/jasonpanelli/scribble#readme",
+  "dependencies": {
+    "@blockly/dev-tools": "^3.1.3",
+    "@blockly/theme-modern": "^2.1.33",
+    "blockly": "^8.0.2",
+    "express": "^4.18.1",
+    "http-server": "^14.1.1"
+  }
+}
