@@ -7,6 +7,8 @@
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
   <script src="./node_modules/blockly/javascript_compressed.js"></script>
   <script src="./node_modules/blockly/msg/en.js"></script>
+  <script src="./webppl.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <style>
     body {
@@ -28,6 +30,8 @@
   <p>
     <button onclick="showCode()">Show JavaScript</button>
     <button onclick="runCode()">Run JavaScript</button>
+    <button onclick="exampleGet()">GET request example</button>
+    <p id="loading"></p>
   </p>
 
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
@@ -139,6 +143,20 @@
       } catch (e) {
         alert(e);
       }
+    }
+
+    function exampleGet() {
+      load = document.getElementById("loading");
+      load.innerHTML = "Get request loading..";
+      var url = new URL("http://localhost:5000/webppl");
+
+      url.searchParams.set('code', "var problem_1 = function() {\n var a = flip(0.3);\n var b = flip(0.6);\n var c = flip(0.1);\n var d = flip(0.8); \n var e = flip(0.4); \n var res = (a || b || ! c) && (b || c || d || ! e) && (! b || ! d || e) && (! a || ! b);\n return res;\n}\nvar dist = Infer(\n {method: 'enumerate'},\n problem_1);\nJSON.stringify(dist);");
+
+      $.get(url.href, function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+        load = document.getElementById("loading");
+        load.innerHTML = "";
+      });
     }
   </script>
 
