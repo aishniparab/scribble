@@ -1,6 +1,8 @@
-# Dev Instructions
+# Build Instructions
 
 Installation:
+
+`git clone https://github.com/turingtestaishni/scribble.git`
 
 `sudo apt install npm`
 
@@ -11,6 +13,31 @@ Running server:
 `npm start`
 
 Then go to http://localhost:5000/
+
+# Dev Instructions
+
+We use a second repository in order to work on our WebPPL generator. Our WebPPL generator is simply an edit to Blockly's built-in Javascript generator.
+
+Clone this repository:
+
+`git clone https://github.com/sjl1826/webppl-generator`
+
+You will find our changes in the `blocks` and `generators/javascript` directories. You can make changes to these files, then build the repository with:
+
+`npm run build`
+
+Build files will appear in the `build` directory. You must copy them into the scribble's directory, `src/scripts`.
+
+These are the files that must be copied after build:
+
+```
+webppl-generator/build/blockly_compressed.js
+webppl-generator/build/blockly_compressed.js.map
+webppl-generator/build/blocks_compressed.js
+webppl-generator/build/blocks_compressed.js.map
+webppl-generator/build/javascript_compressed.js
+webppl-generator/build/javascript_compressed.js.map
+```
 
 # About
 
