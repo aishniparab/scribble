@@ -43,7 +43,6 @@
       <block type="logic_operation"></block>
       <block type="logic_ternary"></block>
       <block type="prob_func"></block>
-      <block type="infer_func"></block>
       <block type="logic_negate"></block>
     </category>
 
@@ -54,6 +53,7 @@
       <block type="logic_boolean"></block>
       <block type="variables_set"></block>
       <block type="variables_get"></block>
+      <block type="infer_func"></block>
     </category>
   </xml>
 
@@ -68,15 +68,24 @@
       alert(code);
     }
 
+    function wrapCode(code) {
+      return 'var webppl_func = function () {\n\n' + code + "\n\n}\nvar inference = Infer(\n {method: 'enumerate'},\n webppl_func);\nJSON.stringify(inference);"
+    }
+
     function runCode() {
       load = document.getElementById("loading");
       load.innerHTML = "Get request loading..";
       var url = new URL("http://localhost:5000/webppl");
 
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
-      url.searchParams.set('code', Blockly.JavaScript.workspaceToCode(demoWorkspace));
+
+      workspaceCode = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+      wrappedCode = wrapCode(workspaceCode);
+
+      url.searchParams.set('code', wrappedCode);
 
       $.get(url.href, function (data, status) {
+        obj = JSON.parse(data);
         alert("Data: " + data + "\nStatus: " + status);
         load = document.getElementById("loading");
         load.innerHTML = "";
