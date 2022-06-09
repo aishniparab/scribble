@@ -3,32 +3,11 @@
 <head>
   <meta charset="utf-8">
   <title>WebPPL Visual Programming Editor</title>
-  <script src="./node_modules/blockly/blockly_compressed.js"></script>
-  <script src="./node_modules/blockly/blocks_compressed.js"></script>
+  <script src="./scripts/blockly_compressed.js"></script>
+  <script src="./scripts/blocks_compressed.js"></script>
   <script src="./scripts/javascript_compressed.js"></script>
   <script src="./scripts/en.js"></script>
 
-  <!-- <script src="./node_modules/blockly/generators/javascript.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/logic.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/loops.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/math.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/text.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/lists.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/colour.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/variables.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/procedures.js"></script> -->
-
-  <!-- <script src="./node_modules/blockly/generators/javascript/colour.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/lists.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/logic.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/loops.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/math.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/procedures.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/text.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/variables_dynamic.js"></script>
-  <script src="./node_modules/blockly/generators/javascript/variables.js"></script>
-  <script src="./node_modules/blockly/generators/javascript.js"></script> -->
-  <!-- <script src="./node_modules/blockly/msg/messages.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <style>
@@ -62,6 +41,9 @@
     <category name="Operations">
       <block type="math_arithmetic"></block>
       <block type="logic_operation"></block>
+      <block type="logic_ternary"></block>
+      <block type="prob_func"></block>
+      <block type="infer_func"></block>
     </category>
 
     <category name="Variables">
@@ -90,7 +72,8 @@
       load.innerHTML = "Get request loading..";
       var url = new URL("http://localhost:5000/webppl");
 
-      url.searchParams.set('code', Blockly.WebPPL.workspaceToCode(demoWorkspace));
+      Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+      url.searchParams.set('code', Blockly.JavaScript.workspaceToCode(demoWorkspace));
 
       $.get(url.href, function (data, status) {
         alert("Data: " + data + "\nStatus: " + status);
