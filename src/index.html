@@ -5,7 +5,8 @@
   <title>WebPPL Visual Programming Editor</title>
   <script src="./node_modules/blockly/blockly_compressed.js"></script>
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
-  <script src="./javascript_compressed.js"></script>
+  <script src="./scripts/javascript_compressed.js"></script>
+  <script src="./scripts/en.js"></script>
 
   <!-- <script src="./node_modules/blockly/generators/javascript.js"></script>
   <script src="./node_modules/blockly/generators/javascript/logic.js"></script>
@@ -27,9 +28,7 @@
   <script src="./node_modules/blockly/generators/javascript/variables_dynamic.js"></script>
   <script src="./node_modules/blockly/generators/javascript/variables.js"></script>
   <script src="./node_modules/blockly/generators/javascript.js"></script> -->
-  <script src="./node_modules/blockly/msg/en.js"></script>
   <!-- <script src="./node_modules/blockly/msg/messages.js"></script> -->
-  <script src="./webppl.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <style>
@@ -76,11 +75,48 @@
   </xml>
 
   <script>
+    Blockly.common.defineBlocksWithJsonArray([{
+      "type": "object",
+      "message0": "{ %1 %2 }",
+      "args0": [
+        {
+          "type": "input_dummy"
+        },
+        {
+          "type": "input_statement",
+          "name": "MEMBERS"
+        }
+      ],
+      "output": null,
+      "colour": 230,
+    },
+    {
+      "type": "member",
+      "message0": "%1 %2 %3",
+      "args0": [
+        {
+          "type": "field_input",
+          "name": "MEMBER_NAME",
+          "text": ""
+        },
+        {
+          "type": "field_label",
+          "name": "COLON",
+          "text": ":"
+        },
+        {
+          "type": "input_value",
+          "name": "MEMBER_VALUE"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 230,
+    }]);
+    console.log("here");
+    console.log(Blockly.Msg);
     var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: 'https://unpkg.com/blockly/media/',
-         toolbox: document.getElementById('toolbox')});
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
-                               demoWorkspace);
+        {toolbox: document.getElementById('toolbox')});
 
     function showCode() {
       // Generate WebPPL code and display it.
