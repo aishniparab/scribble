@@ -5,7 +5,7 @@
   <title>WebPPL Visual Programming Editor</title>
   <script src="./node_modules/blockly/blockly_compressed.js"></script>
   <script src="./node_modules/blockly/blocks_compressed.js"></script>
-  <script src="./node_modules/blockly/javascript_compressed.js"></script>
+  <script src="./javascript_compressed.js"></script>
 
   <!-- <script src="./node_modules/blockly/generators/javascript.js"></script>
   <script src="./node_modules/blockly/generators/javascript/logic.js"></script>
@@ -56,16 +56,16 @@
   <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Control" colour="%{BKY_LOGIC_HUE}">
+    <category name="Control">
       <block type="controls_if"></block>
     </category>
 
-    <category name="Operations" colour="%{BKY_LOOPS_HUE}">
+    <category name="Operations">
       <block type="math_arithmetic"></block>
       <block type="logic_operation"></block>
     </category>
 
-    <category name="Variables" colour="%{BKY_MATH_HUE}">
+    <category name="Variables">
       <block type="math_number">
         <field name="NUM">123</field>
       </block>
