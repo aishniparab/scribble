@@ -6,6 +6,8 @@ Installation:
 
 `sudo apt install npm`
 
+`sudo npm install -g webppl`
+
 `sudo npm install`
 
 Running server:
