@@ -9,6 +9,7 @@
   <script src="./scripts/en.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
 
   <style>
     body {
@@ -31,7 +32,10 @@
     <p id="loading"></p>
   </p>
 
-  <div id="blocklyDiv" style="height: 480px; width: 600px;"></div>
+  <div id="blocklyDiv" style="height: 480px; width: 100%; padding: 5px;"></div>
+  <!-- <div id="blocklyDiv" style="display: table-cell; min-width: 160px;"></div> -->
+
+  <div id="visualizer" style="height: 480px; width: 100%; padding: 5px; border: 1px solid grey;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Control">
@@ -86,9 +90,19 @@
 
       $.get(url.href, function (data, status) {
         obj = JSON.parse(data);
-        alert("Data: " + data + "\nStatus: " + status);
+        alert("Data: " + data + "\nStatus: " + status + "\n");
+        vizdata = JSON.parse(obj["stdout"]);
         load = document.getElementById("loading");
         load.innerHTML = "";
+        var vizdata = [
+          {
+            x: vizdata["support"], 
+            y: vizdata["probs"],
+            type: 'bar'
+          }
+        ]; 
+      
+        Plotly.newPlot('visualizer', vizdata)
       });
     }
 
