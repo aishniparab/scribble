@@ -38,25 +38,36 @@
   <div id="visualizer" style="height: 480px; width: 100%; padding: 5px; border: 1px solid grey;"></div>
 
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Control">
-      <block type="controls_if"></block>
+    <category name="Constants">
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="logic_boolean"></block>
+    </category>
+
+    <category name="Variables">
+      <block type="variables_set"></block>
+      <block type="variables_get"></block>
     </category>
 
     <category name="Operations">
       <block type="math_arithmetic"></block>
       <block type="logic_operation"></block>
-      <block type="logic_ternary"></block>
-      <block type="prob_func"></block>
+      <block type="logic_compare"></block>
       <block type="logic_negate"></block>
     </category>
+    
+    <category name="Control">
+      <block type="controls_if"></block>
+      <block type="logic_ternary"></block>
+    </category>
 
-    <category name="Variables">
-      <block type="math_number">
-        <field name="NUM">123</field>
-      </block>
-      <block type="logic_boolean"></block>
-      <block type="variables_set"></block>
-      <block type="variables_get"></block>
+    <category name="Distributions">
+      <block type="prob_func"></block>
+    </category>
+
+    <category name="Inference">
+      <block type="observe"></block>
       <block type="infer_func"></block>
     </category>
   </xml>
