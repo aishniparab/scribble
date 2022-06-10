@@ -10,31 +10,21 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.plot.ly/plotly-2.12.1.min.js"></script>
-
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-  </style>
 </head>
 <body>
   <p>WebPPL Visual Programming Editor</p>
 
-  <p>
+  <div>
     <button onclick="showCode()">Show WebPPL</button>
     <button onclick="runCode()">Run WebPPL</button>
-    <button onclick="exampleGet()">GET request example</button>
-    <p id="loading"></p>
-  </p>
+    <p><br></p>
+  </div>
 
-  <div id="blocklyDiv" style="height: 480px; width: 100%; padding: 5px;"></div>
-  <div id="visualizer" style="height: 480px; width: 100%; padding: 5px; border: 1px solid grey;"></div>
-
+  <div style="display:inline">
+    <div id="blocklyDiv" style="height: 500px; width: 48%; float: left;"></div>
+    <div id="visualizer" style="height: 300px; width: 48%; float: right; text-align: center; line-height: 300px;"></div>
+    <p id="codeoutput" style="height: 200px; width: 48%; float: right; white-space: pre; font-family: 'Consolas'"></p>
+  </div>
   <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
     <category name="Constants">
       <block type="math_number">
@@ -78,16 +68,18 @@
       // Generate WebPPL code and display it.
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
       var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-      alert(code);
+      out = document.getElementById("codeoutput");
+      out.innerHTML = wrapCode(code);
     }
 
     function wrapCode(code) {
-      return 'var webppl_func = function () {\n\n' + code + "\n\n}\nvar inference = Infer(\n {method: 'enumerate'},\n webppl_func);\nJSON.stringify(inference);"
+      return 'var webppl_func = function () {\n  ' + code.replaceAll('\n', '\n  ') + "\n}\n\nvar inference = Infer(\n  {method: 'enumerate'},\n  webppl_func);\nJSON.stringify(inference);"
     }
 
     function runCode() {
-      load = document.getElementById("loading");
-      load.innerHTML = "Get request loading..";
+      showCode();
+      load = document.getElementById("visualizer");
+      load.innerHTML = "Code running...";
       var url = new URL("http://localhost:5000/webppl");
 
       Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
@@ -99,10 +91,11 @@
 
       $.get(url.href, function (data, status) {
         obj = JSON.parse(data);
-        alert("Data: " + data + "\nStatus: " + status + "\n");
         vizdata = JSON.parse(obj["stdout"]);
-        load = document.getElementById("loading");
+
+        load = document.getElementById("visualizer");
         load.innerHTML = "";
+
         var vizdata = [
           {
             x: vizdata["support"], 
@@ -112,20 +105,6 @@
         ]; 
       
         Plotly.newPlot('visualizer', vizdata)
-      });
-    }
-
-    function exampleGet() {
-      load = document.getElementById("loading");
-      load.innerHTML = "Get request loading..";
-      var url = new URL("http://localhost:5000/webppl");
-
-      url.searchParams.set('code', "var problem_1 = function() {\n var a = flip(0.3);\n var b = flip(0.6);\n var c = flip(0.1);\n var d = flip(0.8); \n var e = flip(0.4); \n var res = (a || b || ! c) && (b || c || d || ! e) && (! b || ! d || e) && (! a || ! b);\n return res;\n}\nvar dist = Infer(\n {method: 'enumerate'},\n problem_1);\nJSON.stringify(dist);");
-
-      $.get(url.href, function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
-        load = document.getElementById("loading");
-        load.innerHTML = "";
       });
     }
   </script>
